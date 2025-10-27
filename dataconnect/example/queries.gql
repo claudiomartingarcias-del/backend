@@ -1,0 +1,24 @@
+mutation CreateUser($displayName: String!, $email: String!, $username: String!, $skillLevel: String!) @auth(level: USER) {
+  user_insert(data: {displayName: $displayName, email: $email, username: $username, skillLevel: $skillLevel, createdAt_expr: "request.time", id_expr: "uuidV4()" })
+}
+
+query ListMatches @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  matches {
+    id
+    title
+    date
+    time
+    court {
+      name
+      address
+    }
+  }
+}
+
+mutation JoinMatch($matchId: UUID!) @auth(level: USER) {
+  matchPlayer_insert(data: {matchId: $matchId, userId_expr: "auth.uid", joinedAt_expr: "request.time"})
+}
+
+mutation CreateMatch($title: String!, $description: String, $date: Date!, $time: String!, $courtId: UUID!, $maxPlayers: Int!, $requiredSkillLevel: String!) @auth(level: USER) {
+  match_insert(data: {title: $title, description: $description, date: $date, time: $time, courtId: $courtId, organizerId_expr: "auth.uid", maxPlayers: $maxPlayers, requiredSkillLevel: $requiredSkillLevel})
+}

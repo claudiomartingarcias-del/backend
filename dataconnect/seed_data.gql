@@ -1,0 +1,108 @@
+mutation SeedData @transaction @auth(level: NO_ACCESS) {
+  user_insertMany(
+    data: [
+      {
+        id: "550e8400-e29b-41d4-a716-446655440000"
+        bio: "Padel enthusiast"
+        createdAt: "2024-03-15T12:00:00Z"
+        displayName: "Demo User 1"
+        email: "demouser1@example.com"
+        skillLevel: "Intermediate"
+        username: "demouser1"
+      }
+      {
+        id: "550e8400-e29b-41d4-a716-446655440001"
+        bio: "Avid Padel Player"
+        createdAt: "2024-03-16T14:00:00Z"
+        displayName: "Demo User 2"
+        email: "demouser2@example.com"
+        skillLevel: "Advanced"
+        username: "demouser2"
+      }
+    ]
+  )
+  court_insertMany(
+    data: [
+      {
+        id: "650e8400-e29b-41d4-a716-446655440000"
+        address: "123 Main St"
+        contactPhone: "555-1234"
+        description: "Local Padel Court"
+        latitude: 34.0522
+        longitude: -118.2437
+        name: "Main Street Court"
+        numberOfCourts: 2
+      }
+      {
+        id: "750e8400-e29b-41d4-a716-446655440001"
+        address: "456 Elm St"
+        contactPhone: "555-5678"
+        description: "Community Padel Center"
+        latitude: 34.0523
+        longitude: -118.2438
+        name: "Elm Street Courts"
+        numberOfCourts: 4
+      }
+    ]
+  )
+  match_insertMany(
+    data: [
+      {
+        id: "850e8400-e29b-41d4-a716-446655440000"
+        courtId: "650e8400-e29b-41d4-a716-446655440000"
+        organizerId: "550e8400-e29b-41d4-a716-446655440000"
+        date: "2024-04-01"
+        description: "Friendly match"
+        maxPlayers: 4
+        requiredSkillLevel: "Intermediate"
+        time: "10:00"
+        title: "Morning Padel"
+      }
+      {
+        id: "950e8400-e29b-41d4-a716-446655440001"
+        courtId: "750e8400-e29b-41d4-a716-446655440001"
+        organizerId: "550e8400-e29b-41d4-a716-446655440001"
+        date: "2024-04-02"
+        description: "Competitive match"
+        maxPlayers: 4
+        requiredSkillLevel: "Advanced"
+        time: "16:00"
+        title: "Afternoon Padel"
+      }
+    ]
+  )
+  matchPlayer_insertMany(
+    data: [
+      {
+        matchId: "850e8400-e29b-41d4-a716-446655440000"
+        userId: "550e8400-e29b-41d4-a716-446655440000"
+        joinedAt: "2024-03-28T09:00:00Z"
+        hasConfirmed: true
+      }
+      {
+        matchId: "950e8400-e29b-41d4-a716-446655440001"
+        userId: "550e8400-e29b-41d4-a716-446655440001"
+        joinedAt: "2024-03-29T15:00:00Z"
+        hasConfirmed: true
+      }
+    ]
+  )
+  message_insertMany(
+    data: [
+      {
+        id: "a50e8400-e29b-41d4-a716-446655440000"
+        matchId: "850e8400-e29b-41d4-a716-446655440000"
+        senderId: "550e8400-e29b-41d4-a716-446655440000"
+        content: "Ready for the morning match?"
+        sentAt: "2024-03-30T08:00:00Z"
+      }
+      {
+        id: "b50e8400-e29b-41d4-a716-446655440001"
+        matchId: "950e8400-e29b-41d4-a716-446655440001"
+        senderId: "550e8400-e29b-41d4-a716-446655440001"
+        content: "Looking forward to the afternoon game!"
+        sentAt: "2024-03-30T13:00:00Z"
+      }
+    ]
+  )
+}

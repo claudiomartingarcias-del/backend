@@ -1,0 +1,46 @@
+type User @table {
+  username: String!
+  email: String!
+  displayName: String!
+  skillLevel: String!
+  createdAt: Timestamp!
+  photoUrl: String
+  bio: String
+  preferredPlayingTimes: [String]
+}
+
+type Court @table {
+  name: String!
+  address: String!
+  latitude: Float!
+  longitude: Float!
+  description: String
+  numberOfCourts: Int
+  contactPhone: String
+}
+
+type Match @table {
+  title: String!
+  date: Date!
+  time: String!
+  court: Court!
+  organizer: User!
+  requiredSkillLevel: String!
+  description: String
+  maxPlayers: Int
+}
+
+type MatchPlayer @table(key: ["match", "user"]) {
+  match: Match!
+  user: User!
+  joinedAt: Timestamp!
+  hasConfirmed: Boolean
+}
+
+type Message @table {
+  sender: User!
+  content: String!
+  sentAt: Timestamp!
+  receiver: User
+  match: Match
+}
